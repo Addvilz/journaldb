@@ -23,7 +23,7 @@
     <name>JournalDB</name>
     <groupId>com.picoff</groupId>
     <artifactId>journaldb</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/picoff/journaldb</url>

@@ -43,7 +43,7 @@ public class JournalDB implements Closeable {
     private final FileLock metaLock;
     private final MappedByteBuffer metadata;
     private final AtomicReference<Journal> currentJournal = new AtomicReference<>();
-    private final AtomicLong fileSequence = new AtomicLong(0);
+    private final AtomicLong fileSequence = new AtomicLong(-1);
     private final ReentrantLock metaWriteLock = new ReentrantLock();
     private final double maxJournalSizeBytes;
     private final Thread relocateMonitor;
@@ -161,7 +161,7 @@ public class JournalDB implements Closeable {
     private long allocateFileSequence() {
         metaWriteLock.lock();
         try {
-            final long nextSequence = fileSequence.getAndIncrement();
+            final long nextSequence = fileSequence.incrementAndGet();
             metadata.putLong(0, nextSequence);
             return nextSequence;
         } finally {
